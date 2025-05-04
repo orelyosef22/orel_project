@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>תוצאות הסימולציה</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    .custom-table {
+  width: 70%;               /* הטבלה תופסת 70% מרוחב העמוד */
+  margin: 20px auto;        /* רווח עליון/תחתון של 20px ומרכוז אופקי */
+}
+
+.custom-table th, .custom-table td {
+  border: 1px solid #000;   /* מסגרת שחורה בעובי 1 פיקסל לכל תא בטבלה */
+  padding: 12px 15px;       /* ריפוד פנימי: 12px לגובה ו-15px לרוחב */
+  text-align: center;       /* יישור תוכן למרכז */
+  min-width: 120px;         /* רוחב מינימלי לכל תא */
+}
+
+.custom-table th {
+  background: #f2f2f2;      /* רקע אפור בהיר לכותרות הטבלה */
+}
+
+#tableContainer {
+  margin: 50px auto;        /* רווח עליון/תחתון של 50px ומרכוז אופקי */
+  overflow-x: auto;         /* תאפשר גלילה אופקית אם הטבלה רחבה מדי */
+  padding: 20px 0;          /* רווח פנימי עליון ותחתון של 20px */
+}
+
+.table-title {
+  text-align: center;       /* יישור טקסט למרכז */
+  font-size: 26px;          /* גודל פונט גדול לכותרת */
+  font-weight: bold;        /* טקסט מודגש */
+  color: #333;              /* צבע טקסט כהה */
+  padding: 10px 0;          /* ריפוד אנכי: 10px עליון ותחתון */
+}
+
+.circle-section {
+  display: flex;            /* הצגת האלמנטים בתוך המחלקה כ-flex */
+  justify-content: center;  /* יישור תוכן למרכז האופקי */
+  padding: 100px 20px;      /* ריפוד: 100px עליון/תחתון, 20px צדדים */
+}
+
+.circle {
+  height: 100px;            /* גובה קבוע של המעגל: 100 פיקסלים */
+  width: 100px;             /* רוחב קבוע של המעגל: 100 פיקסלים */
+  padding: 2px;             /* ריפוד פנימי קל מסביב */
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="images/logo.PNG" alt="לוגו סימולטור ירי IoT" class="nav-logo">
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">דף הבית</a></li>
+        <li><a href="about.html">מידע כללי</a></li>
+        <li><a href="gallery.html">גלריה</a></li>
+        <li><a href="simulation.html">סימולציה</a></li>
+        <li><a href="result.html" class="active">תוצאות</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="table-title">📊 תוצאות הסימולציה</div>
+  <div id="tableContainer">
+    <!-- הטבלה תיווצר כאן -->
+  </div>
+
+  <footer>
+    <div class="footer-bottom">
+      <p>&copy; 2024 סימולטור ירי IoT</p>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script>
+    sessionStorage.removeItem("data");
+    firebase.initializeApp({
+      apiKey: "AIzaSyBrBVe45kYSZZWPI8wmMD6PFCHN7di85z8",
+      authDomain: "shotingsimulator-a1761.firebaseapp.com",
+      projectId: "shotingsimulator-a1761",
+      storageBucket: "shotingsimulator-a1761.appspot.com",
+      messagingSenderId: "1083902603620",
+      appId: "1:1083902603620:web:93e4e9ffc67cf9644bca71"
+    });
+    let count =  6;
+    async function loadSimulationData() {
+      try {
+        let simulation = JSON.parse(sessionStorage.getItem("data") || "[]");
+        let lastSavedBulletCount = Number(sessionStorage.getItem("numofbullets") || 6);
+  
+        const db = firebase.database().ref("altera1/TX");
+        const snapshotB = await db.child("B").get();
+        const snapshotA = await db.child("A").get();
+        const snapshotC = await db.child("C").get();
+  
+        const currentnumofbullet = Number(snapshotB.val());
+        let numofbullets = currentnumofbullet;
+        console.log(currentnumofbullet ,lastSavedBulletCount, count);
+        
+        if (currentnumofbullet != lastSavedBulletCount ) {
+          count = count - 1;
+            const newShot = {
+            distance: snapshotA.val(),
+            hit: snapshotC.val() === "1",
+          };
+          simulation.push(newShot);
+          sessionStorage.setItem("data", JSON.stringify(simulation));
+        }
+          sessionStorage.setItem("numofbullets", currentnumofbullet.toString());
+        
+        
+        let html = "";
+        if(count <= 0){
+          firebase.database().ref("altera1/RX").set(0);
+          html += '<div class="circle-section"><h2>תוצאות:</h2></div>'
+        }else{
+          html += '<div class="circle-section">'
+          for (let i= 0; i < count; i ++){
+            html += '<img class="circle" src="./images/bullet.png">'
+          }
+          html += '</div>'
+        }
+        
+        
+        if (simulation.length > 0) {
+          html += `
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>ירי</th>
+                <th>מרחק מהמטרה (ס״מ)</th>
+                <th>פגיעה במטרה</th>
+              </tr>
+            </thead>
+            <tbody>`;
+          simulation.forEach((shot, index) => {
+            html += `
+              <tr>
+                <td>${index + 1}</td>
+                <td>${shot.distance}</td>
+                <td>${shot.hit ? "✅ כן" : "❌ לא"}</td>
+              </tr>`;
+          }); 
+          html += '</tbody></table>';
+        }
+  
+
+  
+        document.getElementById("tableContainer").innerHTML = html;
+  
+      } catch (error) {
+        console.error("שגיאה בשליפה מ-Firebase:", error);
+        document.getElementById("tableContainer").innerHTML = "<p>שגיאה בטעינת הנתונים.</p>";
+      }
+    }
+  
+    document.addEventListener("DOMContentLoaded", function () {
+      loadSimulationData(); 
+      setInterval(loadSimulationData, 1000); 
+    });
+  </script>
+  
+  
+  
+</body>
+</html>

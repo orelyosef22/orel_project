@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>התחברות</title>
+  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+      }
+  
+      body {
+        background: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+  
+      header {
+    background: #ffffff;
+    color: #333333;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #ddd;
+}
+
+  
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+  
+      nav img {
+        width: 120px;
+      }
+  
+      main {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
+  
+      .signup-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+      }
+  
+      .signup-container h1 {
+        color: #0078d7;
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+  
+      .signup-container p {
+        text-align: center;
+        color: #555;
+      }
+  
+      .signup-container img {
+        width: 100%;
+        max-height: 250px;
+        border-radius: 8px;
+        object-fit: cover;
+        margin: 15px 0;
+      }
+  
+      form {
+        display: grid;
+        gap: 1rem;
+      }
+  
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+  
+      .form-group label {
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+  
+      .form-group input {
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+  
+      button[type="submit"] {
+        background: #0078d7;
+        color: white;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+  
+      button[type="submit"]:hover {
+        background: #005bb5;
+      }
+  
+      a {
+        color: #0078d7;
+        text-decoration: none;
+      }
+  
+      a:hover {
+        text-decoration: underline;
+      }
+  
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 0.9rem;
+      }
+  
+      .footer-content {
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem;
+        flex-wrap: wrap;
+      }
+  
+      .footer-section {
+        margin: 1rem;
+      }
+  
+      .social-links a {
+        color: white;
+        margin: 0 8px;
+        font-size: 1.5rem;
+        transition: color 0.3s;
+      }
+  
+      .social-links a:hover {
+        color: #0078d7;
+      }
+  
+      @media (max-width: 768px) {
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+        }
+  
+        .signup-container {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="images/logo.PNG" alt="לוגו סימולטור ירי IoT">
+        </div>
+      </nav>
+    </header>
+  
+    <main>
+      <div class="signup-container">
+        <h1>ברוך הבא לסימולטור הירי!</h1>
+        <p>אנחנו שמחים לראות אותך שוב. מלא את הפרטים למטה כדי להתחבר.</p>
+  
+        <img src="images/welcome.png" alt="ברוך הבא">
+  
+        <form id="login-form">
+          <div class="form-group">
+            <label for="email"><i class="fa fa-envelope"></i> דוא"ל:</label>
+            <input type="email" id="email" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="username"><i class="fa fa-user"></i> שם משתמש:</label>
+            <input type="text" id="username" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="password"><i class="fa fa-lock"></i> סיסמה:</label>
+            <input type="password" id="password" required autocomplete="current-password">
+          </div>
+          <button type="submit">התחבר</button>
+        </form>
+  
+        <p>אין לך חשבון? <a href="singup.html">הרשם כאן</a></p>
+      </div>
+    </main>
+  
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ניווט מהיר</h4>
+          <ul>
+            <li><a href="index.html">דף הבית</a></li>
+            <li><a href="login.html">התחבר</a></li>
+            <li><a href="signup.html">הרשם</a></li>
+            <li><a href="about.html">מידע כללי</a></li>
+            <li><a href="gallery.html">גלריה</a></li>
+            <li><a href="contact.html">צור קשר</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>צור קשר</h4>
+          <p>טלפון: 055-661-4119</p>
+          <p>דוא"ל: info@simulator.co.il</p>
+        </div>
+        <div class="footer-section">
+          <h4>עקבו אחרינו</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 סימולטור ירי IoT. כל הזכויות שמורות.</p>
+      </div>
+    </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html> 
+
+<script>
+  // אתחול Firebase
+  firebase.initializeApp({
+    apiKey: "AIzaSyBrBVe45kYSZZWPI8wmMD6PFCHN7di85z8",
+    authDomain: "shotingsimulator-a1761.firebaseapp.com",
+    projectId: "shotingsimulator-a1761",
+    storageBucket: "shotingsimulator-a1761.firebasestorage.app",
+    messagingSenderId: "1083902603620",
+    appId: "1:1083902603620:web:93e4e9ffc67cf9644bca71",
+    measurementId: "G-E29SY4RPZX"
+  });
+  
+const loginForm = document.getElementById('login-form');
+const db = firebase.database();
+
+// טיפול בשליחת טופס התחברות
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = loginForm['email'].value;
+    const username = loginForm['username'].value;
+    const password = loginForm['password'].value;
+
+    // התחברות עם Firebase Authentication בלבד
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log('משתמש התחבר:', user);
+
+            // בדיקה אם המשתמש קיים ב-Database (לא חובה, אך מומלץ)
+            db.ref('users/' + user.uid).once('value').then((snapshot) => {
+                if (!snapshot.exists()) {
+                    db.ref('users/' + user.uid).set({
+                        email: user.email,
+                        username: user.username
+                    });
+                }
+            });
+            localStorage.setItem("username", username);
+            // הפניה לדף הבית
+            window.location.href = 'index.html';
+        })
+        .catch((error) => {
+            console.error('שגיאת התחברות:', error.code, error.message);
+            alert('האימייל או הסיסמה שגויים. אנא נסה שוב.');
+        });
+});
+</script>
