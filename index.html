@@ -14,8 +14,8 @@
             <div class="logo">
                 <img src="images/logo.png" alt="לוגו סימולטור ירי IoT">
                 <ul class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
-                    <a class="nav-link" href="singup.html">Sign Up</a>
+                    <a class="nav-link" href="login.html" id="loginbutton">Login</a>
+                    <a class="nav-link" href="singup.html" id="signupbutton">Sign Up</a>
                 </ul>
             </div>
             <ul class="nav-links">
@@ -166,6 +166,24 @@
             <p>&copy; 2024 סימולטור ירי IoT. כל הזכויות שמורות.</p>
         </div>
     </footer>
-
+<script>
+       const firebaseConfig = {
+    apiKey: "AIzaSyBrBVe45kYSZZWPI8wmMD6PFCHN7di85z8",
+    authDomain: "shotingsimulator-a1761.firebaseapp.com",
+    projectId: "shotingsimulator-a1761",
+    storageBucket: "shotingsimulator-a1761.firebasestorage.app",
+    messagingSenderId: "1083902603620",
+    appId: "1:1083902603620:web:93e4e9ffc67cf9644bca71",
+    measurementId: "G-E29SY4RPZX"
+  };
+ firebase.initializeApp(firebaseConfig);
+    firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // If user is logged in
+      document.getElementById("loginbutton").style.display = "none";
+      document.getElementById("signupbutton").style.display = "none";
+    } 
+  });
+</script>
 </body>
 </html>
