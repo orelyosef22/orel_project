@@ -244,7 +244,7 @@
 
 <script>
   // אתחול Firebase
-  firebase.initializeApp({
+   const firebaseConfig = {
     apiKey: "AIzaSyBrBVe45kYSZZWPI8wmMD6PFCHN7di85z8",
     authDomain: "shotingsimulator-a1761.firebaseapp.com",
     projectId: "shotingsimulator-a1761",
@@ -252,8 +252,8 @@
     messagingSenderId: "1083902603620",
     appId: "1:1083902603620:web:93e4e9ffc67cf9644bca71",
     measurementId: "G-E29SY4RPZX"
-  });
-  
+  };
+ firebase.initializeApp(firebaseConfig);
 const loginForm = document.getElementById('login-form');
 const db = firebase.database();
 
