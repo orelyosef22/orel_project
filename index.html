@@ -179,7 +179,6 @@
  firebase.initializeApp(firebaseConfig);
     firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // If user is logged in
       document.getElementById("loginbutton").style.display = "none";
       document.getElementById("signupbutton").style.display = "none";
     } 
